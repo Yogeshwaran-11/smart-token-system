@@ -11,7 +11,7 @@
 //   const BACKEND_URL = 'https://smart-token-backend.onrender.com';
 // ===================================================================
 
-const BACKEND_URL = '';  // <-- UPDATE THIS AFTER RENDER DEPLOYMENT
+const BACKEND_URL = 'https://smart-token-system.onrender.com';  // <-- UPDATE THIS AFTER RENDER DEPLOYMENT
 
 // ===================================================================
 // Computed values — do NOT modify below this line
