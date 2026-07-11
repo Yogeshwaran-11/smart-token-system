@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Token - Select Public Center</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <style>
+        .selector-box {
+            max-width: 500px;
+            margin: 6rem auto;
+            padding: 3rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header class="app-header">
+        <div class="app-logo">
+            <span>🎫</span> Smart Token System
+        </div>
+    </header>
+
+    <main class="app-content">
+        <div class="glass-container selector-box">
+            <h1 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 1rem; line-height: 1.2;">Select Public Center</h1>
+            <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 2.5rem; line-height: 1.4;">
+                Please select the center you want to access, then proceed to the authentication portal.
+            </p>
+            
+            <div class="form-group" style="margin-bottom: 2.5rem;">
+                <label class="form-label" style="text-align: center;">Office Center</label>
+                <select id="hub-office-selector" class="form-input" style="background-color: var(--bg-dark); font-size: 1.1rem; padding: 1rem 1.5rem; text-align-last: center; font-weight: 600; cursor: pointer;">
+                    <option value="BANK">🏦 Bank Branch</option>
+                    <option value="ESEVAI">📝 E-Sevai Maiyam</option>
+                    <option value="POST_OFFICE">📦 Post Office</option>
+                    <option value="MUNICIPAL">🏗️ Municipal Corporation</option>
+                </select>
+            </div>
+            
+            <button id="proceed-btn" class="btn btn-primary" style="width: 100%; padding: 1rem; font-size: 1.1rem;">
+                Proceed to Login →
+            </button>
+        </div>
+    </main>
+
+    <script src="/static/js/index.js"></script>
+</body>
+</html>

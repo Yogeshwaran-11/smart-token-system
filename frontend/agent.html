@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Token - Agent Console</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <header class="app-header">
+        <div class="app-logo">
+            <span>💻</span> Counter Agent Console
+        </div>
+        <div style="display: flex; gap: 1rem; align-items: center;">
+            <div id="counter-display" class="office-tag" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.3); color: #34d399;">Offline</div>
+            <div id="office-type-tag" class="office-tag">Loading Office...</div>
+            <button id="agent-logout-btn" class="btn btn-danger" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">Logout</button>
+        </div>
+    </header>
+
+    <main class="app-content">
+        <!-- Setup / Login Section -->
+        <div id="login-section" class="glass-container panel-section" style="max-width: 500px; margin: 4rem auto;">
+            <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem; text-align: center;">Counter Login</h2>
+            <div class="form-group">
+                <label class="form-label" for="counter-select">Select Counter Number</label>
+                <select id="counter-select" class="form-input" style="background-color: var(--bg-dark);">
+                    <!-- Dynamic counters will load here -->
+                </select>
+            </div>
+            <button id="login-btn" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Start Serving</button>
+        </div>
+
+        <!-- Workstation Section (Initially Hidden) -->
+        <div id="workstation-section" class="agent-layout" style="display: none;">
+            <!-- Left Side: Serving Panel -->
+            <div class="glass-container panel-section" style="height: fit-content;">
+                <div class="console-header">
+                    <h2 style="font-size: 1.4rem; font-weight: 700;">Active Customer</h2>
+                    <span id="status-badge" class="office-tag" style="background: rgba(99,102,241,0.15); color: #818cf8;">Ready</span>
+                </div>
+
+                <div id="active-token-card" class="token-detail-card">
+                    <div class="detail-no-active">No customer currently being served</div>
+                </div>
+
+                <div class="console-actions">
+                    <button id="call-next-btn" class="btn btn-success" style="font-size: 1.1rem; padding: 1rem;">Call Next Customer</button>
+                    <button id="recall-btn" class="btn btn-warning" style="font-size: 1rem; display: none;">Recall</button>
+                    <button id="complete-btn" class="btn btn-primary" style="font-size: 1rem; display: none;">Mark Complete</button>
+                    <button id="missed-btn" class="btn btn-danger" style="font-size: 1rem; display: none;">Missed / No Show</button>
+                </div>
+            </div>
+
+            <!-- Right Side: Service Queue Overview -->
+            <div class="glass-container panel-section" style="height: fit-content; display: flex; flex-direction: column;">
+                <h3 style="font-size: 1.1rem; font-weight: 700; text-transform: uppercase; color: #a5b4fc; margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color);">
+                    Lobby Queue Status
+                </h3>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 1.5rem; font-weight: 600;">
+                    <span>People Waiting:</span>
+                    <span id="waiting-count" style="color: var(--accent-warning);">0</span>
+                </div>
+                <div id="queue-preview" class="waiting-list" style="max-height: 350px;">
+                    <!-- Loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/static/js/config.js"></script>
+    <script src="/static/js/agent.js"></script>
+</body>
+</html>

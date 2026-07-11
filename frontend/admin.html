@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Token - Admin Dashboard</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <style>
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .kpi-card {
+            padding: 1.5rem;
+            text-align: center;
+            border-radius: var(--radius-md);
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .kpi-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--accent-primary);
+            margin-top: 0.5rem;
+        }
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 1rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        th, td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        th {
+            color: #a5b4fc;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+        }
+        tr:hover {
+            background: rgba(255,255,255,0.01);
+        }
+        .badge {
+            padding: 0.2rem 0.6rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .badge-pending { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+        .badge-serving { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+        .badge-completed { background: rgba(99, 102, 241, 0.15); color: #818cf8; }
+        .badge-missed { background: rgba(239, 68, 68, 0.15); color: #f87171; }
+    </style>
+</head>
+<body>
+    <header class="app-header">
+        <div class="app-logo">
+            <span>📊</span> Office Admin Dashboard
+        </div>
+        <div id="office-type-tag" class="office-tag">Loading Office...</div>
+    </header>
+
+    <main class="app-content">
+        <!-- Authenticated Dashboard View -->
+        <div id="admin-dashboard-view">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+                <h2 style="font-size: 1.6rem; font-weight: 800;">Daily Performance Metrics</h2>
+                
+                <!-- Logout inside Admin Dashboard -->
+                <div style="display: flex; gap: 0.8rem; align-items: center;">
+                    <button id="admin-logout-btn" class="btn btn-danger" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Logout</button>
+                </div>
+            </div>
+            
+            <!-- KPI Metrics Grid -->
+            <div class="kpi-grid">
+                <div class="kpi-card glass-container">
+                    <div style="font-size: 0.85rem; color: var(--text-secondary); font-weight: 600;">Total Tokens Generated</div>
+                    <div id="kpi-total" class="kpi-value">0</div>
+                </div>
+                <div class="kpi-card glass-container">
+                    <div style="font-size: 0.85rem; color: var(--text-secondary); font-weight: 600;">Waiting Customers</div>
+                    <div id="kpi-pending" class="kpi-value" style="color: var(--accent-warning);">0</div>
+                </div>
+                <div class="kpi-card glass-container">
+                    <div style="font-size: 0.85rem; color: var(--text-secondary); font-weight: 600;">Currently Serving</div>
+                    <div id="kpi-serving" class="kpi-value" style="color: var(--accent-success);">0</div>
+                </div>
+                <div class="kpi-card glass-container">
+                    <div style="font-size: 0.85rem; color: var(--text-secondary); font-weight: 600;">Completed Services</div>
+                    <div id="kpi-completed" class="kpi-value" style="color: var(--accent-primary);">0</div>
+                </div>
+                <div class="kpi-card glass-container">
+                    <div style="font-size: 0.85rem; color: var(--text-secondary); font-weight: 600;">No-Shows / Missed</div>
+                    <div id="kpi-missed" class="kpi-value" style="color: var(--accent-danger);">0</div>
+                </div>
+                <div class="kpi-card glass-container">
+                    <div style="font-size: 0.85rem; color: var(--text-secondary); font-weight: 600;">Avg. Wait Time</div>
+                    <div id="kpi-avg-wait" class="kpi-value" style="color: #c084fc;">0m</div>
+                </div>
+            </div>
+
+            <!-- Detail Table -->
+            <div class="glass-container panel-section">
+                <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">Active Queue Details</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Token No.</th>
+                                <th>Service Category</th>
+                                <th>Customer Info</th>
+                                <th>Status</th>
+                                <th>Assigned Counter</th>
+                                <th>Created At</th>
+                            </tr>
+                        </thead>
+                        <tbody id="token-table-body">
+                            <tr>
+                                <td colspan="6" style="text-align: center; color: var(--text-secondary);">No tokens in the database for today.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Counter Management Section -->
+            <div class="glass-container panel-section" style="margin-top: 2rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <h3 style="font-size: 1.2rem; font-weight: 700;">Counter Allocation</h3>
+                    <div style="display: flex; gap: 0.8rem; align-items: center;">
+                        <input type="number" id="new-counter-number" class="form-input" placeholder="Counter No." style="width: 120px; padding: 0.5rem 1rem;" min="1">
+                        <button id="add-counter-btn" class="btn btn-success" style="padding: 0.5rem 1rem; font-size: 0.9rem;">+ Add Counter</button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Counter No.</th>
+                                <th>Status</th>
+                                <th>Current Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="counter-table-body">
+                            <!-- Loaded dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/static/js/config.js"></script>
+    <script src="/static/js/admin.js"></script>
+</body>
+</html>

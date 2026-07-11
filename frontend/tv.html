@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Token - Lobby Display</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <style>
+        body {
+            height: 100vh;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <header class="app-header">
+        <div class="app-logo">
+            <span>📺</span> Lobby Display Panel
+        </div>
+        <div style="display: flex; gap: 1.2rem; align-items: center;">
+            <button id="enable-audio-btn" class="btn btn-warning" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">
+                🔊 Enable Voice
+            </button>
+            <div id="office-type-tag" class="office-tag">Loading Office...</div>
+            <div id="live-time" style="font-weight: 600; font-size: 1.1rem; text-align: right;">00:00:00</div>
+            <button id="tv-logout-btn" class="btn btn-danger" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">Logout</button>
+        </div>
+    </header>
+
+    <main class="app-content" style="padding: 1.5rem;">
+        <div class="tv-layout">
+            <!-- Left Side: Currently serving counters -->
+            <div class="tv-panel glass-container">
+                <div class="panel-header">Now Serving / இப்போது அழைக்கப்படுபவர்</div>
+                <div id="active-calls-grid" class="active-call-grid">
+                    <!-- Loaded dynamically -->
+                    <div style="grid-column: 1/-1; display: flex; align-items: center; justify-content: center; height: 100%; color: var(--text-secondary);">
+                        No counters active. Waiting for staff logins...
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Waiting tokens -->
+            <div class="tv-panel glass-container">
+                <div class="panel-header">Waiting Queue / காத்திருப்போர்</div>
+                <div id="waiting-list" class="waiting-list">
+                    <!-- Loaded dynamically -->
+                    <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: var(--text-secondary);">
+                        No pending tokens.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="app-footer">
+        <div class="ticker-wrap">
+            <div class="ticker">
+                Welcome to Smart Token Queue System. Please generate a token at the kiosk and wait for your turn. 
+                • Please maintain social distancing. 
+                • Keep your documentation ready.
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/js/config.js"></script>
+    <script src="/static/js/tv.js"></script>
+</body>
+</html>

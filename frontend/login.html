@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Token - Portal Login</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <style>
+        .login-box {
+            max-width: 480px;
+            margin: 4rem auto;
+            padding: 2.5rem;
+        }
+        .toggle-link {
+            color: var(--accent-primary);
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header class="app-header">
+        <div class="app-logo">
+            <span>🎫</span> Authentication Portal
+        </div>
+        <div id="office-type-tag" class="office-tag">Loading Office...</div>
+    </header>
+
+    <main class="app-content">
+        <div class="glass-container login-box">
+            
+            <!-- Login View -->
+            <div id="signin-view">
+                <h2 style="font-size: 1.6rem; font-weight: 700; margin-bottom: 0.5rem; text-align: center;">Sign In</h2>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; text-align: center; margin-bottom: 2rem;">
+                    Sign in with your registered credentials to access your console.
+                </p>
+                <div id="signin-error" style="color: var(--accent-danger); font-size: 0.9rem; margin-bottom: 1.5rem; text-align: center; display: none; font-weight: 600;">
+                    Invalid credentials.
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="signin-email">Email Address</label>
+                    <input type="email" id="signin-email" class="form-input" placeholder="e.g., name@gmail.com" required>
+                </div>
+                <div class="form-group" style="margin-bottom: 2rem;">
+                    <label class="form-label" for="signin-password">Password</label>
+                    <input type="password" id="signin-password" class="form-input" placeholder="••••••••" required>
+                </div>
+                <button id="signin-btn" class="btn btn-primary" style="width: 100%; padding: 0.9rem; margin-bottom: 1.5rem;">Sign In</button>
+                <p style="text-align: center; font-size: 0.9rem; color: var(--text-secondary);">
+                    New visitor? <span id="to-signup-btn" class="toggle-link">Register account</span>
+                </p>
+            </div>
+
+            <!-- Signup View (Hidden by default) -->
+            <div id="signup-view" style="display: none;">
+                <h2 style="font-size: 1.6rem; font-weight: 700; margin-bottom: 0.5rem; text-align: center;">Customer Registration</h2>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; text-align: center; margin-bottom: 2rem;">
+                    Create a customer account to generate kiosk tickets and monitor live status.
+                </p>
+                <div id="signup-error" style="color: var(--accent-danger); font-size: 0.9rem; margin-bottom: 1.5rem; text-align: center; display: none; font-weight: 600;">
+                    Invalid signup details.
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="signup-email">Email Address</label>
+                    <input type="email" id="signup-email" class="form-input" placeholder="e.g., customer@gmail.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="signup-password">Password</label>
+                    <input type="password" id="signup-password" class="form-input" placeholder="Min. 5 characters" required>
+                </div>
+                <div class="form-group" style="margin-bottom: 2rem;">
+                    <label class="form-label" for="signup-confirm-password">Confirm Password</label>
+                    <input type="password" id="signup-confirm-password" class="form-input" placeholder="Confirm password" required>
+                </div>
+                <button id="signup-btn" class="btn btn-success" style="width: 100%; padding: 0.9rem; margin-bottom: 1.5rem;">Register & Open Kiosk</button>
+                <p style="text-align: center; font-size: 0.9rem; color: var(--text-secondary);">
+                    Already have an account? <span id="to-signin-btn" class="toggle-link">Sign In</span>
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="/static/js/config.js"></script>
+    <script src="/static/js/login.js"></script>
+</body>
+</html>
